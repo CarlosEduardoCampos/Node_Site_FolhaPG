@@ -27,6 +27,9 @@ $~ nodemon index.js
 
 
 ### LINKS UTEIS:
+https://expressjs.com/en/guide/routing.html
+https://www.npmjs.com/package/ejs
+https://www.npmjs.com/package/dotenv
 
 ### PADRÕES DE COMMIT:
 feat: uma nova feature (recurso) que você está adicionando a uma aplicação específica

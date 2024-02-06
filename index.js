@@ -2,12 +2,9 @@
 const app = require('./config/ServerDependencies')
 
 // Importando rotas:
-//const appRoutes = require('./app/routes/index');
+const appRoutes = require('./app/routes/index');
+appRoutes(app);
 
-// Rota principal(HOME):
-app.get('/', (req, res) => {
-    res.render('pages/index');
-});
 
 const port = process.env.SERVER_PORT;
 

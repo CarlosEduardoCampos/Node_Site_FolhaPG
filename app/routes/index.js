@@ -11,7 +11,7 @@ module.exports = (app) =>{
 
     // Rota para Area adiministrativa:
     app.get('/Acess/System', (req, res) => {
-        res.render('pages/index');
+        res.render('pages_admin/index');
     });
 
     // Rota para Cadastro de funcionario:

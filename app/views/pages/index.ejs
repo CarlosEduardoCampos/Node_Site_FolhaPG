@@ -5,55 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Folha de Pagamento</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700;800&display=swap');
-    body {
-        width: 96.5vw;
-        font-family: 'Sono', monospace;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-    }
-
-    section {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        height: 100vh;
-        padding: 1em;
-    }
-
-    section div{
-        position: relative;
-        text-align: left;
-        width: 500px;
-        height: 500px;
-    }
-
-    section div .btn{
-        width: 200px;
-        border: none;
-        border-radius: 30px;
-        padding: 10px 40px;
-        font-weight: 700;
-        font-size: 1em;
-        text-decoration: none;
-        color: #fff;
-        background-color: #399E5A;
-        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.548);
-    }
-
-    section .btn:hover {
-        background-color: #2c7945;
-    } 
-
-    section div img{
-        height: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="./css/menu_principal.css">
+  <link rel="stylesheet" href="./css/footer_principal.css">
+  <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 </head>
     <body>
+
         <%- include('../components/menu_principal.ejs') %>
         <section>
             <div style="padding-top: 10%;">
@@ -66,5 +24,6 @@
             </div>
         </section>
         <%- include('../components/footer_principal.ejs') %>
+
     </body>
 </html>

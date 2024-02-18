@@ -32,6 +32,9 @@ https://www.npmjs.com/package/ejs
 https://www.npmjs.com/package/dotenv
 https://boxicons.com/usage
 
+### Regra de negocio:
+https://blog.convenia.com.br/como-fazer-folha-de-pagamento/
+
 ### PADRÕES DE COMMIT:
 feat: uma nova feature (recurso) que você está adicionando a uma aplicação específica
 fix: a resolução de um bug

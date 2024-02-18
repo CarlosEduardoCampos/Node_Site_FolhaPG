@@ -6,7 +6,7 @@ const appRoutes = require('./app/routes/index');
 appRoutes(app);
 
 
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || 3000;
 
 // Inicia o servidor:
 app.listen(port, () => console.log(`127.0.0.1:${port}`));

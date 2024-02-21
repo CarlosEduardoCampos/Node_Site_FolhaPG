@@ -1,9 +1,14 @@
 const Ocupacoes = require("../models/Ocupacoes");
+const ControllersEmpresas = require("../controllers/ControllersEmpresas");
 
 module.exports = (app) =>{
     // Rota principal(HOME):
     app.get('/', (req, res) => {
         res.render('pages/index');
+    });
+
+    app.get('/teste', (req, res) => {
+        ControllersEmpresas.listEmpresas(app, req, res);
     });
 
     // Rota para login da aplicação:

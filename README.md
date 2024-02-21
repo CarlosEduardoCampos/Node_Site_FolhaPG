@@ -19,9 +19,13 @@ $~ npm install dotenv
 $~ npm install ejs
     Instala biblioteca que permite inserir js no html.
 
+$~ npm install mysql --save
+    Instala pacode de depedencia do banco de dados MySQL
+
 ### COMANDOS UTEIS:
 
 $~ npm start
+-
 $~ nodemon index.js
     Inicia o sevidor utilizando a biblioteca nodemon.
 

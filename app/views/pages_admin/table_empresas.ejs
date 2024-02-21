@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../css/menu_admin.css">
+    <link rel="stylesheet" href="../css/table_users_admin.css">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700;800&display=swap');
+
+    *{
+        box-sizing: border-box;
+    }
+
+    body{
+        margin: 0;
+        background: #f9f9f9;
+        font-family: "Sono", monospace;
+        padding-left: 80px;
+    }
+</style>
+<body>
+    <%- include('../components/menu_admin.ejs') -%>
+    <%- include('../components/table_empresas.ejs')-%>
+</body>
+<script type="text/javascript">
+    const toggleSidebar = () => document.body.classList.toggle("open");
+</script>
+</html>

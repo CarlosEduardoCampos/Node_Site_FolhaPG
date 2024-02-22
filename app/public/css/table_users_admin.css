@@ -7,30 +7,38 @@ table {
 }
 
 th, td {
-    padding: 15px;
+    padding: 5px;
     text-align: left;
-    border-bottom: 1px solid #666666;
-    border-left: 1px solid #666666;
-    text-align: center;
+    border: 1px solid #666666;
+    transition: 0.3s;
 }
 
 th {
     background-color: #333;
     color: white;
+    text-align: center;
 }
 
 td a{
-    width: 100%;
-    height: 100%;
+    position: relative;
     font-size: 1.5em;
+    color: #333;
+    transition: 0.3s;
 }
 
-.btn{
-    color: #ffff;
+.red{
+    color: red;
 }
 
-.btn:hover{
+.center{
+    text-align: center;
+}
+
+td:hover{
     background-color: #333;
-    color: #ffff;
+    color: white;
 }
 
+td:hover a{
+    color: white;
+}

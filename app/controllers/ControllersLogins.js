@@ -1,13 +1,14 @@
-const Empresas = require("../models/Empresas");
+const Logins = require("../models/Logins");
+const connection = require("../../config/DataBaseMYSQL");
 
-class ControllersEmpresas{
+class ControllersLogins{
     constructor(){
     }
 
     listEmpresas(app, req, res){
-        const empresa = new Empresas(this.conn);
+        const login = new Logins();
     
-        empresa.read((error, result, fields) => {
+        login.read(2, (error, result, fields) => {
             if(!error){
                 res.render("pages_admin/table_empresas",{empresas:result})
             }
@@ -18,4 +19,4 @@ class ControllersEmpresas{
     };
 }
 
-module.exports = new ControllersEmpresas();
+module.exports = new ControllersLogins();

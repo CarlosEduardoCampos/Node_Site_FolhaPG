@@ -1,14 +1,27 @@
 CREATE DATABASE IF NOT EXISTS folha_pg;
 
-USE folha_pg; 
+USE folha_pg;
 
-CREATE TABLE IF NOT EXISTS fpg_empresas(
-	ID_empresa INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS fpg_tiposlogin(
+    ID_tipo INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(50) NOT NULL,
+    descricao VARCHAR(200)
+);
+
+CREATE TABLE IF NOT EXISTS fpg_logins(
+    ID_login INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
-    cnpj VARCHAR(18) NOT NULL,
     telefone VARCHAR(18) NOT NULL,
     email VARCHAR(200) NOT NULL,
-    senha VARCHAR(200) NOT NULL
+    senha VARCHAR(200) NOT NULL,
+    FK_tipo INTEGER NOT NULL,
+    FOREIGN KEY (FK_tipo) REFERENCES fpg_tiposlogin(ID_tipo)
+);
+CREATE TABLE IF NOT EXISTS fpg_empresas(
+	ID_empresa INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cnpj VARCHAR(18) NOT NULL,
+    FK_login INTEGER NOT NULL,
+    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login)
 );
 
 CREATE TABLE IF NOT EXISTS fpg_periodosdepagamento(
@@ -25,9 +38,6 @@ CREATE TABLE IF NOT EXISTS fpg_turnos(
 
 CREATE TABLE IF NOT EXISTS fpg_colaboradores(
     ID_colaborador INTEGER PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
-    email VARCHAR(200) NOT NULL,
-    senha VARCHAR(200) NOT NULL,
     cargo varchar(15) NOT NULL,
     salario DECIMAL(10, 2) NOT NULL,
     DT_adimissao DATE NOT NULL,
@@ -35,6 +45,8 @@ CREATE TABLE IF NOT EXISTS fpg_colaboradores(
     FK_empresa INTEGER NOT NULL,
     FK_periodo INTEGER,
     FK_turno INTEGER,
+    FK_login INTEGER NOT NULL,
+    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login),
     FOREIGN KEY (FK_periodo) REFERENCES fpg_periodosdepagamento(ID_periodo),
     FOREIGN KEY (FK_empresa) REFERENCES fpg_empresas(ID_empresa),
     FOREIGN KEY (FK_turno) REFERENCES fpg_turnos(ID_turno)
@@ -79,72 +91,56 @@ CREATE TABLE IF NOT EXISTS fpg_horasextra(
 );
 
 
-# Insets de teste:
+-- Inserindo dados na tabela fpg_tiposlogin
+INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Administrador', 'Acesso total ao sistema');
+INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Gerente', 'Acesso limitado ao sistema');
+INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Funcionário', 'Acesso restrito ao sistema');
+INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Visitante', 'Acesso mínimo ao sistema');
 
--- Insira 5 empresas
-INSERT INTO fpg_empresas (nome, cnpj, telefone, email, senha) VALUES
-('Copilot Tecnologia', '12.345.678/0001-90', '(11) 1234-5678', 'contato@copilot.com.br', 'copilot123'),
-('Bing Pesquisa', '98.765.432/0001-09', '(21) 9876-5432', 'suporte@bing.com.br', 'bing456'),
-('GitHub Desenvolvimento', '55.444.333/0001-66', '(31) 5555-4444', 'atendimento@github.com.br', 'github789'),
-('Microsoft Software', '77.888.999/0001-33', '(41) 7777-8888', 'sac@microsoft.com.br', 'microsoft012'),
-('Azure Nuvem', '22.111.000/0001-11', '(51) 2222-1111', 'cloud@azure.com.br', 'azure345');
+-- Inserindo dados na tabela fpg_logins
+INSERT INTO fpg_logins(nome, telefone, email, senha, FK_tipo) VALUES ('João Silva', '+5511999999999', 'joao.silva@email.com', 'senha123', 1);
+INSERT INTO fpg_logins(nome, telefone, email, senha, FK_tipo) VALUES ('Maria Santos', '+5511888888888', 'maria.santos@email.com', 'senha123', 2);
+INSERT INTO fpg_logins(nome, telefone, email, senha, FK_tipo) VALUES ('Carlos Pereira', '+5511777777777', 'carlos.pereira@email.com', 'senha123', 3);
+INSERT INTO fpg_logins(nome, telefone, email, senha, FK_tipo) VALUES ('Ana Costa', '+5511666666666', 'ana.costa@email.com', 'senha123', 4);
 
--- Insira 3 períodos de pagamento
-INSERT INTO fpg_periodosdepagamento (titulo, numero_de_dias) VALUES
-('Mensal', 30),
-('Quinzenal', 15),
-('Semanal', 7);
+-- Inserindo dados na tabela fpg_empresas
+INSERT INTO fpg_empresas(cnpj, FK_login) VALUES ('56.789.123/0001-44', 2);
 
--- Insira 4 turnos
-INSERT INTO fpg_turnos (titulo, descricao) VALUES
-('Matutino', 'Das 8h às 12h'),
-('Vespertino', 'Das 13h às 17h'),
-('Noturno', 'Das 18h às 22h'),
-('Integral', 'Das 8h às 17h');
+-- Inserindo dados na tabela fpg_periodosdepagamento
+INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Mensal', 30);
+INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Semanal', 7);
+INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Quinzenal', 15);
+INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Diário', 1);
 
--- Insira 10 colaboradores
-INSERT INTO fpg_colaboradores (nome, email, senha, cargo, salario, DT_adimissao, DT_demissao, FK_empresa, FK_periodo, FK_turno) VALUES
-('Ana Silva', 'ana.silva@copilot.com.br', 'ana123', 'Analista', 3500.00, '2023-01-02', NULL, 1, 1, 1),
-('Bruno Santos', 'bruno.santos@bing.com.br', 'bruno456', 'Pesquisador', 4500.00, '2023-02-15', NULL, 2, 2, 2),
-('Carla Souza', 'carla.souza@github.com.br', 'carla789', 'Desenvolvedora', 5500.00, '2023-03-01', NULL, 3, 1, 3),
-('Daniel Oliveira', 'daniel.oliveira@microsoft.com.br', 'daniel012', 'Gerente', 6500.00, '2023-04-10', NULL, 4, 1, 4),
-('Eduardo Lima', 'eduardo.lima@azure.com.br', 'eduardo345', 'Engenheiro', 7500.00, '2023-05-20', NULL, 5, 1, 1),
-('Fabiana Costa', 'fabiana.costa@copilot.com.br', 'fabiana123', 'Assistente', 2500.00, '2023-06-05', NULL, 1, 3, 2),
-('Gabriel Rocha', 'gabriel.rocha@bing.com.br', 'gabriel456', 'Estagiário', 1500.00, '2023-07-15', NULL, 2, 3, 3),
-('Helena Dias', 'helena.dias@github.com.br', 'helena789', 'Coordenadora', 5500.00, '2023-08-01', NULL, 3, 2, 4),
-('Igor Alves', 'igor.alves@microsoft.com.br', 'igor012', 'Consultor', 4500.00, '2023-09-10', NULL, 4, 2, 1),
-('Julia Martins', 'julia.martins@azure.com.br', 'julia345', 'Arquiteta', 6500.00, '2023-10-20', NULL, 5, 2, 2);
+-- Inserindo dados na tabela fpg_turnos
+INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Manhã', 'Das 8h às 12h');
+INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Tarde', 'Das 13h às 17h');
+INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Noite', 'Das 18h às 22h');
+INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Madrugada', 'Das 23h às 3h');
 
--- Insira 2 descontos
-INSERT INTO fpg_descontos (titulo, descricao) VALUES
-('INSS', 'Contribuição previdenciária'),
-('IRPF', 'Imposto de renda retido na fonte');
+-- Inserindo dados na tabela fpg_colaboradores
+INSERT INTO fpg_colaboradores(cargo, salario, DT_adimissao, FK_empresa, FK_periodo, FK_turno, FK_login) VALUES ('Desenvolvedor', 4000.00, '2024-01-01', 1, 3, 3, 3);
+INSERT INTO fpg_colaboradores(cargo, salario, DT_adimissao, FK_empresa, FK_periodo, FK_turno, FK_login) VALUES ('Estagiário', 1500.00, '2024-01-01', 1, 4, 4, 4);
 
--- Insira 3 benefícios
-INSERT INTO fpg_beneficios (titulo, descricao) VALUES
-('Vale-transporte', 'Auxílio para o deslocamento até o trabalho'),
-('Vale-refeição', 'Auxílio para a alimentação durante o trabalho'),
-('Plano de saúde', 'Cobertura de despesas médicas e hospitalares');
+-- Inserindo dados na tabela fpg_descontos
+INSERT INTO fpg_descontos(titulo, descricao) VALUES ('INSS', 'Desconto do INSS');
+INSERT INTO fpg_descontos(titulo, descricao) VALUES ('IRPF', 'Desconto do Imposto de Renda');
+INSERT INTO fpg_descontos(titulo, descricao) VALUES ('Vale Transporte', 'Desconto do Vale Transporte');
+INSERT INTO fpg_descontos(titulo, descricao) VALUES ('Plano de Saúde', 'Desconto do Plano de Saúde');
 
--- Insira 20 horas extras
-INSERT INTO fpg_horasextra (horas, minutos, mes, ano, dia, FK_colaborador) VALUES
-(2, 30, 1, 2023, '2023-01-05', 1),
-(1, 45, 1, 2023, '2023-01-10', 1),
-(3, 15, 1, 2023, '2023-01-15', 2),
-(2, 0, 1, 2023, '2023-01-20', 2),
-(4, 30, 1, 2023, '2023-01-25', 3),
-(3, 45, 1, 2023, '2023-01-30', 3),
-(2, 15, 2, 2023, '2023-02-04', 4),
-(1, 30, 2, 2023, '2023-02-09', 4),
-(3, 0, 2, 2023, '2023-02-14', 5),
-(2, 45, 2, 2023, '2023-02-19', 5),
-(4, 15, 2, 2023, '2023-02-24', 6),
-(3, 30, 2, 2023, '2023-02-29', 6),
-(2, 0, 3, 2023, '2023-03-05', 7),
-(1, 15, 3, 2023, '2023-03-10', 7),
-(3, 30, 3, 2023, '2023-03-15', 8),
-(2, 15, 3, 2023, '2023-03-20', 8),
-(4, 0, 3, 2023, '2023-03-25', 9),
-(3, 15, 3, 2023, '2023-03-30', 9),
-(2, 30, 4, 2023, '2023-04-05', 10),
-(1, 45, 4, 2023, '2023-04-10', 10);
+-- Inserindo dados na tabela fpg_beneficios
+INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Vale Alimentação', 'Benefício de Vale Alimentação');
+INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Vale Refeição', 'Benefício de Vale Refeição');
+INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Vale Transporte', 'Benefício de Vale Transporte');
+INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Plano de Saúde', 'Benefício de Plano de Saúde');
+
+-- Inserindo dados na tabela fpg_beneficioscolaboradores
+INSERT INTO fpg_beneficioscolaboradores(FK_beneficio, FK_colaborador) VALUES (1, 1);
+INSERT INTO fpg_beneficioscolaboradores(FK_beneficio, FK_colaborador) VALUES (2, 2);
+
+-- Inserindo dados na tabela fpg_horasextra
+INSERT INTO fpg_horasextra(horas, minutos, mes, ano, dia, FK_colaborador) VALUES (3, 15, 2, 2024, '2024-02-03', 1);
+INSERT INTO fpg_horasextra(horas, minutos, mes, ano, dia, FK_colaborador) VALUES (2, 0, 2, 2024, '2024-02-04', 2);
+
+
+

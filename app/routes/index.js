@@ -1,5 +1,5 @@
 const Ocupacoes = require("../models/Ocupacoes");
-const ControllersEmpresas = require("../controllers/ControllersEmpresas");
+const ControllersLogins = require("../controllers/ControllersLogins");
 
 module.exports = (app) =>{
     // Rota principal(HOME):
@@ -8,7 +8,7 @@ module.exports = (app) =>{
     });
 
     app.get('/teste', (req, res) => {
-        ControllersEmpresas.listEmpresas(app, req, res);
+        ControllersLogins.listEmpresas(app, req, res);
     });
 
     // Rota para login da aplicação:

@@ -1,0 +1,22 @@
+DROP PROCEDURE IF EXISTS create_empresa;
+
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS create_empresa(
+    pc_nome VARCHAR(50),
+    pc_telefone VARCHAR(18),
+    pc_email VARCHAR(200),
+    pc_senha VARCHAR(200),
+    pc_fk_tipo INTEGER,
+    pc_cnpj VARCHAR(18)
+)
+BEGIN
+    INSERT INTO fpg_logins(nome, telefone, email, senha, fk_tipo) 
+    VALUES (pc_nome, pc_telefone, pc_email, pc_senha, 2);
+    
+    INSERT INTO fpg_empresas(cnpj, FK_login) 
+    VALUES (pc_cnpj, LAST_INSERT_ID());
+END $$
+
+DELIMITER ;
+

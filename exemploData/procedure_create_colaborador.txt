@@ -1,0 +1,26 @@
+DROP PROCEDURE IF EXISTS create_colaborador;
+
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS create_colaborador(
+	pc_nome VARCHAR(50),
+    pc_telefone VARCHAR(18),
+    pc_email VARCHAR(200),
+    pc_senha VARCHAR(200),
+    pc_fk_tipo INTEGER,
+    pc_cargo varchar(15),
+    pc_salario DECIMAL(10, 2),
+    pc_dt_admissao DATE,
+    pc_fk_empresa INTEGER,
+    pc_fk_periodo INTEGER,
+    pc_fk_turno INTEGER
+)
+BEGIN
+	INSERT INTO fpg_logins(nome, telefone, email, senha, fk_tipo)
+    VALUES (pc_nome, pc_telefone, pc_email, pc_senha, 3);
+    
+    INSERT INTO fpg_colaboradores(cargo, salario, DT_admissao, FK_empresa, FK_periodo, FK_turno, FK_login)
+    VALUES (pc_cargo, pc_salario, pc_dt_admissao, pc_fk_empresa, pc_fk_periodo, pc_fk_turno, LAST_INSERT_ID());
+END $$
+
+DELIMITER ;

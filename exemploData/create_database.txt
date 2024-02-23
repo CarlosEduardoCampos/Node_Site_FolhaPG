@@ -1,0 +1,144 @@
+DROP DATABASE IF EXISTS folha_pg;
+CREATE DATABASE IF NOT EXISTS folha_pg;
+
+USE folha_pg;
+
+CREATE TABLE IF NOT EXISTS fpg_tiposlogin(
+    ID_tipo INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    tipo VARCHAR(50) NOT NULL,
+    descricao VARCHAR(200)
+);
+
+CREATE TABLE IF NOT EXISTS fpg_logins(
+    ID_login INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    telefone VARCHAR(18) NOT NULL,
+    email VARCHAR(200) NOT NULL,
+    senha VARCHAR(200) NOT NULL,
+    FK_tipo INTEGER NOT NULL,
+    FOREIGN KEY (FK_tipo) REFERENCES fpg_tiposlogin(ID_tipo)
+);
+CREATE TABLE IF NOT EXISTS fpg_empresas(
+	ID_empresa INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cnpj VARCHAR(18) NOT NULL,
+    FK_login INTEGER NOT NULL,
+    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login)
+);
+
+CREATE TABLE IF NOT EXISTS fpg_periodosdepagamento(
+	ID_periodo INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(50) NOT NULL,
+    numero_de_dias INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS fpg_turnos(
+	ID_turno INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(50) NOT NULL,
+    descricao varchar(200)
+);
+
+CREATE TABLE IF NOT EXISTS fpg_colaboradores(
+    ID_colaborador INTEGER PRIMARY KEY AUTO_INCREMENT,
+    cargo varchar(15) NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL,
+    DT_admissao DATE NOT NULL,
+    DT_demissao DATE,
+    FK_empresa INTEGER NOT NULL,
+    FK_periodo INTEGER,
+    FK_turno INTEGER,
+    FK_login INTEGER NOT NULL,
+    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login),
+    FOREIGN KEY (FK_periodo) REFERENCES fpg_periodosdepagamento(ID_periodo),
+    FOREIGN KEY (FK_empresa) REFERENCES fpg_empresas(ID_empresa),
+    FOREIGN KEY (FK_turno) REFERENCES fpg_turnos(ID_turno)
+);
+
+CREATE TABLE  IF NOT EXISTS fpg_descontos(
+	ID_desconto INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(50) NOT NULL,
+    descricao VARCHAR(200)
+);
+
+# Unindo a tabela de descontos e colaborador:
+CREATE TABLE IF NOT EXISTS fpg_descontoscolaboradores(
+	FK_desconto INTEGER NOT NULL,
+    FK_colaborador INTEGER NOT NULL,
+    FOREIGN KEY (FK_desconto) REFERENCES fpg_descontos(ID_desconto),
+    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador)
+);
+
+CREATE TABLE IF NOT EXISTS fpg_beneficios(
+	ID_beneficio INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(50) NOT NULL,
+    descricao VARCHAR(200)
+);
+
+# Unindo a tabela de beneficios e colaborador:
+CREATE TABLE IF NOT EXISTS fpg_beneficioscolaboradores(
+	FK_beneficio INTEGER NOT NULL,
+    FK_colaborador INTEGER NOT NULL,
+    FOREIGN KEY (FK_beneficio) REFERENCES fpg_beneficios(ID_beneficio),
+    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador)
+);
+
+CREATE TABLE IF NOT EXISTS fpg_horasextra(
+    horas INTEGER,
+    minutos INTEGER,
+    mes INTEGER NOT NULL,
+    ano INTEGER NOT NULL,
+    dia DATE NOT NULL,
+    FK_colaborador INTEGER NOT NULL,
+    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador)
+);
+
+DROP PROCEDURE IF EXISTS create_empresa;
+
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS create_empresa(
+    pc_nome VARCHAR(50),
+    pc_telefone VARCHAR(18),
+    pc_email VARCHAR(200),
+    pc_senha VARCHAR(200),
+    pc_fk_tipo INTEGER,
+    pc_cnpj VARCHAR(18)
+)
+BEGIN
+    INSERT INTO fpg_logins(nome, telefone, email, senha, fk_tipo) 
+    VALUES (pc_nome, pc_telefone, pc_email, pc_senha, 2);
+    
+    INSERT INTO fpg_empresas(cnpj, FK_login) 
+    VALUES (pc_cnpj, LAST_INSERT_ID());
+END $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS create_colaborador;
+
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS create_colaborador(
+	pc_nome VARCHAR(50),
+    pc_telefone VARCHAR(18),
+    pc_email VARCHAR(200),
+    pc_senha VARCHAR(200),
+    pc_fk_tipo INTEGER,
+    pc_cargo varchar(15),
+    pc_salario DECIMAL(10, 2),
+    pc_dt_admissao DATE,
+    pc_fk_empresa INTEGER,
+    pc_fk_periodo INTEGER,
+    pc_fk_turno INTEGER
+)
+BEGIN
+	INSERT INTO fpg_logins(nome, telefone, email, senha, fk_tipo)
+    VALUES (pc_nome, pc_telefone, pc_email, pc_senha, 3);
+    
+    INSERT INTO fpg_colaboradores(cargo, salario, DT_admissao, FK_empresa, FK_periodo, FK_turno, FK_login)
+    VALUES (pc_cargo, pc_salario, pc_dt_admissao, pc_fk_empresa, pc_fk_periodo, pc_fk_turno, LAST_INSERT_ID());
+END $$
+
+DELIMITER ;
+
+
+

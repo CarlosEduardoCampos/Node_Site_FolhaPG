@@ -1,32 +1,15 @@
 const connection = require("../../config/DataBaseMYSQL")
 
 class Logins{
-    constructor(){
+    constructor(id_login=0, nome='', telefone='', email='', senha='', fk_tipo=0){
         this.conn = connection; 
-        this.ID_login = 0;
-        this.nome = "";
-        this.telefone = "";
-        this.email = "";
-        this.senha = "";
-        this.FK_tipo = 0;
+        this.id_login = id_login;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+        this.fk_tipo = fk_tipo;
     }
-
-    // Metodos CRUD:
-    create(){
-        return 0;
-    };
-
-    read(type, callback){
-        this.conn.query("SELECT * FROM fpg_logins WHERE FK_tipo = ?;", type, callback)
-    };
-
-    update(empresa=new Empresas()){
-        return empresa;
-    };
-
-    delete(id){
-        return id;
-    };
 };
 
 module.exports = Logins;

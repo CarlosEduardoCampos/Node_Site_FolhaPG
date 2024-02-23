@@ -1,14 +1,14 @@
 const Ocupacoes = require("../models/Ocupacoes");
-const ControllersLogins = require("../controllers/ControllersLogins");
+const Empresas = require("./Empresas");
 
 module.exports = (app) =>{
+
+    // Rotas Navegação dados Empresas:
+    Empresas(app);
+
     // Rota principal(HOME):
     app.get('/', (req, res) => {
         res.render('pages/index');
-    });
-
-    app.get('/teste', (req, res) => {
-        ControllersLogins.listEmpresas(app, req, res);
     });
 
     // Rota para login da aplicação:

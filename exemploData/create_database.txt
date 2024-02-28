@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS fpg_empresas(
 	ID_empresa INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     cnpj VARCHAR(18) NOT NULL,
     FK_login INTEGER NOT NULL,
-    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login)
+    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS fpg_periodosdepagamento(
@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS fpg_colaboradores(
     FK_periodo INTEGER,
     FK_turno INTEGER,
     FK_login INTEGER NOT NULL,
-    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login),
+    FOREIGN KEY (FK_login) REFERENCES fpg_logins(ID_login) ON DELETE CASCADE,
     FOREIGN KEY (FK_periodo) REFERENCES fpg_periodosdepagamento(ID_periodo),
-    FOREIGN KEY (FK_empresa) REFERENCES fpg_empresas(ID_empresa),
+    FOREIGN KEY (FK_empresa) REFERENCES fpg_empresas(ID_empresa) ON DELETE CASCADE,
     FOREIGN KEY (FK_turno) REFERENCES fpg_turnos(ID_turno)
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS fpg_descontoscolaboradores(
 	FK_desconto INTEGER NOT NULL,
     FK_colaborador INTEGER NOT NULL,
     FOREIGN KEY (FK_desconto) REFERENCES fpg_descontos(ID_desconto),
-    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador)
+    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS fpg_beneficios(
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS fpg_beneficioscolaboradores(
 	FK_beneficio INTEGER NOT NULL,
     FK_colaborador INTEGER NOT NULL,
     FOREIGN KEY (FK_beneficio) REFERENCES fpg_beneficios(ID_beneficio),
-    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador)
+    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS fpg_horasextra(
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS fpg_horasextra(
     ano INTEGER NOT NULL,
     dia DATE NOT NULL,
     FK_colaborador INTEGER NOT NULL,
-    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador)
+    FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador) ON DELETE CASCADE
 );
 
 DROP PROCEDURE IF EXISTS create_empresa;

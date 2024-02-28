@@ -2,6 +2,6 @@ const ControllersColaboradores = require("../controllers/ControllersColaboradore
 
 module.exports = (app) => {
     app.get('/colaboradores/list/:id', (req, res) => {
-        ControllersColaboradores.listColaboradores(app, req, res);
+        ControllersColaboradores.renderListColaboradores(app, req, res);
     });
 };

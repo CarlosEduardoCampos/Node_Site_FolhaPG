@@ -75,7 +75,7 @@ class Empresas extends Logins{
         this. conn.query(
             "DELETE FROM fpg_logins WHERE ID_login = ?;",
             id,
-            callback()
+            callback
         );
     };
 };

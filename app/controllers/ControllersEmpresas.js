@@ -1,12 +1,13 @@
 const Empresas = require("../models/Empresas");
+const TIPO_LOGIN = 2;
 
 class ControllersEmpresas{
     constructor(){
         this.empresa = new Empresas();
     }
 
-    // Listando todas as empresas cadastradas:
-    listEmpresas(app, req, res){
+    // Renderisa lista de todas as empresas cadastradas:
+    renderTableEmpresas(req, res){
         this.empresa.read((error, result, fields) => {
             // Confirma se a requisição ao banco deu certo:(Se sim)
             if(!error){
@@ -19,17 +20,49 @@ class ControllersEmpresas{
         });
     };
 
-    newEmpresa(app, req, res){
-        this.empresa = new Empresas(0, 'João Silva', '(31) 98765-4321', 'joao.silva@email.com', 'senha123', 2);
+    // Renderisa Formulario para cadastro de uma empresa:
+    renderFormEmpresas(req, res){
+        try {
+            res.render("pages/cad_empresa");
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    // Cadastra uma nova empresa e renderisa a lista de empresas:
+    createEmpresa(req, res){
+        this.empresa = new Empresas(
+            0,
+            req.body.nome,
+            req.body.telefone, 
+            req.body.email,
+            req.body.senha,
+            TIPO_LOGIN,
+            0,
+            req.body.cnpj
+        );
+
         this.empresa.create((error, result, fields) => {
             if(!error){
-                console.log("cad_empresa: foi realizado!")
+                res.redirect('/Acess/System');
             }
             else{
                 console.log(error);
             }    
         });
-        this.listEmpresas(app, req, res)
+    }
+
+    // Apaga uma empresa do banco de dados:
+    deleteEmpresa(req, res){
+        this.empresa.delete(req.params.id, (error, result, fields) => {
+            if(!error){
+                res.redirect('/empresas/list');
+            }
+            else{
+                console.log(error);
+            }
+        });
     }
 }
 

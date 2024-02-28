@@ -5,7 +5,7 @@ class ControllersColaboradores{
         this.colaboradores = new Colaboradores();
     }
 
-    listColaboradores(app, req, res){
+    renderListColaboradores(app, req, res){
         this.colaboradores.read(req.params.id, (error, result, fields) => {
             // Confirmo se a requisição ao banco deu certo:(SE sim)
             if(!error){

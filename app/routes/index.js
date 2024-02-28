@@ -5,6 +5,7 @@ module.exports = (app) =>{
 
     // Rotas Navegação dados Empresas:
     Empresas(app);
+    Colaboradores(app);
 
     // Rota principal(HOME):
     app.get('/', (req, res) => {
@@ -19,16 +20,6 @@ module.exports = (app) =>{
     // Rota para Area adiministrativa:
     app.get('/Acess/System', (req, res) => {
         res.render('pages_admin/index');
-    });
-
-    // Rota para Cadastro de funcionario:
-    app.get('/Cad/Fuc', (req, res) => {
-        res.render('pages/cad_fuc');
-    });
-
-    // Rota para Cadastro de funcionario:
-    app.get('/Cad/Admin', (req, res) => {
-        res.render('pages/cad_admin');
     });
 
     // Busca um codigo CBO:

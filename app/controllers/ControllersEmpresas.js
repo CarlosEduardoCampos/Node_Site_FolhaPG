@@ -5,11 +5,14 @@ class ControllersEmpresas{
         this.empresa = new Empresas();
     }
 
+    // Listando todas as empresas cadastradas:
     listEmpresas(app, req, res){
         this.empresa.read((error, result, fields) => {
+            // Confirma se a requisição ao banco deu certo:(Se sim)
             if(!error){
                 res.render("pages_admin/table_empresas",{empresas:result})
             }
+            //(Se não)
             else{
                 console.log(error);
             }    

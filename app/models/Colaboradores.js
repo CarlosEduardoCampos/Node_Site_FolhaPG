@@ -34,6 +34,7 @@ class Colaboradores extends Logins{
     };
 
     //Metodos CRUD:
+    // Raliza o cadastro de um novo colaborador:
     create(callback){
         this.conn.query("CALL create_colaborador(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [
@@ -53,15 +54,38 @@ class Colaboradores extends Logins{
         );
     };
 
-    read(){
-
+    // Busca um  ou mais colaboradores no banco:
+    read(id_empresa, callback, id_login=null){
+        // Ferifica se a busca e por um colaborado especifico:(Se não)
+        if(!id_login){
+            this.conn.query(
+                "SELECT  FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.FK_empresa = ?;",
+                id_empresa,
+                callback()
+            );
+        }
+        //(Se sim)
+        else{
+            this.conn.query(
+                "SELECT * FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.FK_empresa = ? AND ID_login = ?;",
+                [
+                    id_empresa,
+                    id_login
+                ],
+                callback()
+            );
+        }
     };
 
+    // Atualiza os dados cadastrados de um colaborador:
     update(){
 
     };
 
+    // Apaga o cadastro de um colaborador:
     delete(){
 
     };
 };
+
+module.exports = Colaboradores;

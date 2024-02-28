@@ -39,7 +39,7 @@ class Empresas extends Logins{
         if(!id_login){
             this.conn.query(
                 "SELECT ID_login, ID_empresa, cnpj, nome, telefone, email FROM fpg_empresas INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo;",
-                callback()
+                callback
             );
         }
         //(Se sim)
@@ -47,7 +47,7 @@ class Empresas extends Logins{
             this.conn.query(
                 "SELECT * FROM fpg_empresas INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_logins.ID_login  = ?;",
                 id_login, 
-                callback()
+                callback
             );
         };
     };

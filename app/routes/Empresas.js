@@ -5,7 +5,7 @@ module.exports = (app) => {
         ControllersEmpresas.listEmpresas(app, req, res);
     });
 
-    app.get('/empresas/new', (req, res) =>{
+    app.get('/empresas/new', (req, res) => {
         ControllersEmpresas.newEmpresa(app, req, res);
     });
 };

@@ -59,9 +59,9 @@ class Colaboradores extends Logins{
         // Ferifica se a busca e por um colaborado especifico:(Se não)
         if(!id_login){
             this.conn.query(
-                "SELECT  FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.FK_empresa = ?;",
+                "SELECT ID_login, ID_colaborador, nome, telefone, email, cargo FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.FK_empresa = ?;",
                 id_empresa,
-                callback()
+                callback
             );
         }
         //(Se sim)
@@ -72,7 +72,7 @@ class Colaboradores extends Logins{
                     id_empresa,
                     id_login
                 ],
-                callback()
+                callback
             );
         }
     };

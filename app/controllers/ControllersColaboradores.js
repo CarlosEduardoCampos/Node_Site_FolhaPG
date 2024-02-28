@@ -6,7 +6,7 @@ class ControllersColaboradores{
     }
 
     listColaboradores(app, req, res){
-        this.colaboradores.read(1, (error, result, fields) =>{
+        this.colaboradores.read(2, (error, result, fields) =>{
             // Confirmo se a requisição ao banco deu certo:(SE sim)
             if(!error){
                 console.log(result);
@@ -18,3 +18,5 @@ class ControllersColaboradores{
         });
     }
 }
+
+module.exports = new ControllersColaboradores();

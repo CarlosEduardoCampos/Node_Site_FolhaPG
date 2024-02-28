@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/menu_admin.css">
-    <link rel="stylesheet" href="../css/cabecalho_tabela.css">
-    <link rel="stylesheet" href="../css/table.css">
-    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/menu_admin.css">
+    <link rel="stylesheet" href="../../css/cabecalho_tabela.css">
+    <link rel="stylesheet" href="../../css/table.css">
+    <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700;800&display=swap');
@@ -28,18 +28,18 @@
     <%- include('../components/menu_admin.ejs') -%>
 
     <header id="cabecalho_tabela">
-        <h1>Empresas</h1>
+        <h1>Empresas > Colaboradores</h1>
         <div>
             <form action="/buscar/empresa" method="post" id="form_pesquisa">
                 <input type="text">
                 <input type="submit" value="pesquisar">
             </form>
     
-            <a href="http://"> Nova Empresa </a>
+            <a href="http://"> Novo Colaborador </a>
         </div>
     </header>
     <main>
-        <%- include('../components/table_empresas.ejs')-%>
+        <%- include('../components/table_colaboradores.ejs')-%>
     </main>
 </body>
 <script type="text/javascript">

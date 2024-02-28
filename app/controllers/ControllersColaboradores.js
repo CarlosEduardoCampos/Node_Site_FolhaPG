@@ -6,10 +6,10 @@ class ControllersColaboradores{
     }
 
     listColaboradores(app, req, res){
-        this.colaboradores.read(2, (error, result, fields) =>{
+        this.colaboradores.read(req.params.id, (error, result, fields) => {
             // Confirmo se a requisição ao banco deu certo:(SE sim)
             if(!error){
-                console.log(result);
+                res.render("pages_admin/table_colaboradores",{colaboradores:result});
             }
             //(Se não)
             else{

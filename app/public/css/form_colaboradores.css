@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@200;300;400;500;600;700;800&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    background: #f9f9f9;
+    font-family: "Sono", monospace;
+    padding-left: 80px;
+}
+
+main{
+    width: 50%;
+}
+
+form{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 20px;
+    padding: 20px 0px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group > input, select{
+    padding: 5px;
+    font-size: 1em;
+}
+
+.form-group > .btn{
+    border: none;
+    border-radius: 10px;
+    padding: 10px 40px;
+    font-weight: 700;
+    font-size: 1em;
+    color: #fff;
+    background-color: #399E5A;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.13);
+}
+.form-group > .btn:hover {
+    background-color: #2c7945;
+} 
+.col3{
+    grid-column: span 3;
+}
+
+.col2{
+    grid-column: span 2;
+}
+
+.col1{
+    grid-column: span 1;
+}

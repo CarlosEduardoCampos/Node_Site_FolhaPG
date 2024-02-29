@@ -36,13 +36,12 @@ class Colaboradores extends Logins{
     //Metodos CRUD:
     // Raliza o cadastro de um novo colaborador:
     create(callback){
-        this.conn.query("CALL create_colaborador(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        this.conn.query("CALL create_colaborador(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [
             this.nome,
             this.telefone,
             this.email,
             this.senha,
-            this.fk_tipo,
             this.cargo,
             this.salario,
             this.dt_admissao,
@@ -50,7 +49,7 @@ class Colaboradores extends Logins{
             this.fk_periodo,
             this.fk_turno
         ],
-        callback()
+        callback
         );
     };
 

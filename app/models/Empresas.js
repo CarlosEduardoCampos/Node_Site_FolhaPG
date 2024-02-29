@@ -62,7 +62,6 @@ class Empresas extends Logins{
                 this.telefone,
                 this.email,
                 this.senha,
-                this.fk_tipo,
                 this.id_empresa,
                 this.cnpj
             ],

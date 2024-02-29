@@ -7,7 +7,6 @@ CREATE PROCEDURE IF NOT EXISTS create_empresa(
     pc_telefone VARCHAR(18),
     pc_email VARCHAR(200),
     pc_senha VARCHAR(200),
-    pc_fk_tipo INTEGER,
     pc_cnpj VARCHAR(18)
 )
 BEGIN

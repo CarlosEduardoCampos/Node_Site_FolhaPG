@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cadastro de Colaborador</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../css/menu_admin.css">
+    <link rel="stylesheet" href="../../css/form_colaboradores.css">
+    <link rel="stylesheet" href="../../css/cabecalho_tabela.css">
+    <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <%- include('../components/menu_admin.ejs') -%>
+    <header id="cabecalho_tabela">
+        <h1>Empresas > Colaboradores > Novo Colaborador</h1>
+        <hr>
+    </header>
+    <main>
+        <form action="/colaboradores/new/<%= id %>" method="post">
+            <div class="form-group col2">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" placeholder="Nome Completo" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" name="telefone" required>
+            </div>
+            <div class="form-group col2">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" placeholder="meuemail@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha">
+            </div>
+            <div class="form-group">
+                <label for="cargo"> Cargo </label>
+                <input type="text" name="cargo">
+            </div>
+            <div class="form-group">
+                <label for="salario">Salario</label>
+                <input type="number" name="salrio">
+            </div>
+            <div class="form-group">
+                <label for="DT_admissao">Data da Admissão</label>
+                <input type="date" name="DT_admissao">
+            </div>
+            <div class="form-group">
+                <label for="FK_periodo">Periodo de Pagamento</label>
+                <select name="FK_periodo">
+                    <option value="1">Mensal</option>
+                    <option value="2">Semanal</option>
+                    <option value="3">Quinzenal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="FK_turno">Turno</label>
+                <select name="FK_turno">
+                    <option value="1">Manhã</option>
+                    <option value="2">Tarde</option>
+                    <option value="3">Noite</option>
+                </select>
+            </div>
+            <div class="form-group col3">
+                <input type="submit" value="Criar" class="btn">
+            </div>
+        </form>
+    </main>
+</body>
+</html>

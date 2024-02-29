@@ -2,6 +2,14 @@ const ControllersColaboradores = require("../controllers/ControllersColaboradore
 
 module.exports = (app) => {
     app.get('/colaboradores/list/:id', (req, res) => {
-        ControllersColaboradores.renderListColaboradores(app, req, res);
+        ControllersColaboradores.renderTableColaboradores(req, res);
+    });
+
+    app.get('/colaboradores/new/:id', (req,res) => {
+        ControllersColaboradores.renderFormColaboradores(req, res);
+    });
+
+    app.post('/colaboradores/new/:id', (req,res) => {
+        ControllersColaboradores.createColaboradores(req, res);
     });
 };

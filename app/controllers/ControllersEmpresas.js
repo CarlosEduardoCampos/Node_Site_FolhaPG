@@ -1,5 +1,4 @@
 const Empresas = require("../models/Empresas");
-const TIPO_LOGIN = 2;
 
 class ControllersEmpresas{
     constructor(){
@@ -38,7 +37,7 @@ class ControllersEmpresas{
             req.body.telefone, 
             req.body.email,
             req.body.senha,
-            TIPO_LOGIN,
+            0,
             0,
             req.body.cnpj
         );

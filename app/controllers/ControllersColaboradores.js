@@ -5,13 +5,53 @@ class ControllersColaboradores{
         this.colaboradores = new Colaboradores();
     }
 
-    renderListColaboradores(app, req, res){
+    // Renderiza uma lista dos colaboradores relacionados a empresa:
+    renderTableColaboradores(req, res){
         this.colaboradores.read(req.params.id, (error, result, fields) => {
             // Confirmo se a requisição ao banco deu certo:(SE sim)
             if(!error){
-                res.render("pages_admin/table_colaboradores",{colaboradores:result});
+                res.render("pages_admin/table_colaboradores",{colaboradores:result, id_empresa: req.params.id});
             }
             //(Se não)
+            else{
+                console.log(error);
+            }
+        });
+    }
+
+    // Renderiza o formulario de cadastro de colaboradores:
+    renderFormColaboradores(req, res){
+        try {
+            res.render("pages_admin/form_colaboradores", {id:req.params.id});
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    //Cria um novo colaborador e renderiza a nova lista de colaboradores:
+    createColaboradores(req, res){
+        this.colaboradores = new Colaboradores(
+            0,
+            req.body.nome,
+            req.body.telefone,
+            req.body.email,
+            req.body.senha,
+            0,
+            0,
+            req.body.cargo,
+            req.body.salario,
+            req.body.DT_admissao,
+            '',
+            req.params.id,
+            req.body.FK_periodo,
+            req.body.FK_turno
+        );
+        this.colaboradores.create((error, result) => {
+            // Confirmo se ouve problemas com a query:(Se nao)
+            if(!error){
+                res.redirect('/colaboradores/list/' + req.params.id);
+            }
             else{
                 console.log(error);
             }

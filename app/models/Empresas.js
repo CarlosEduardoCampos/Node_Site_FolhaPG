@@ -55,14 +55,13 @@ class Empresas extends Logins{
     // Atualiza os dados de um cadastro no banco:
     update(callback){
         this.conn.query(
-            "CALL update_empresa(?, ?, ?, ?, ?, ?, ?, ?);", 
+            "CALL update_empresa(?, ?, ?, ?, ?, ?);", 
             [
                 this.id_login,
+                this.id_empresa,
                 this.nome,
                 this.telefone,
                 this.email,
-                this.senha,
-                this.id_empresa,
                 this.cnpj
             ],
             callback

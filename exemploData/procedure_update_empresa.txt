@@ -1,0 +1,19 @@
+DROP PROCEDURE IF EXISTS update_empresa;
+
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS update_empresa(
+    pc_id_login INTEGER,
+    pc_id_empresa INTEGER,
+    pc_nome VARCHAR(50),
+    pc_telefone VARCHAR(18),
+    pc_email VARCHAR(200),
+    pc_cnpj VARCHAR(18)
+)
+BEGIN
+    UPDATE fpg_logins SET nome = pc_nome, telefone = pc_telefone, email = pc_email WHERE ID_login = pc_id_login;
+    
+    UPDATE fpg_empresas SET cnpj = pc_cnpj WHERE ID_empresa = pc_id_empresa; 
+END $$
+
+DELIMITER ;

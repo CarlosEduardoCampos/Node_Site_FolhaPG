@@ -8,7 +8,6 @@ class ControllersColaboradores{
     // Renderiza uma lista dos colaboradores relacionados a empresa:
     renderTableColaboradores(req, res){
         this.colaboradores.read(req.params.id, (error, result) => {
-            console.log(result);
             // Confirmo se a requisição ao banco deu certo:(SE sim)
             if(!error){
                 res.render("pages_admin/table_colaboradores",{colaboradores:result, id_empresa: req.params.id});

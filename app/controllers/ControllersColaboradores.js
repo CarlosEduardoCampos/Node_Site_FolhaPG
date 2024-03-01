@@ -3,11 +3,12 @@ const Colaboradores = require("../models/Colaboradores");
 class ControllersColaboradores{
     constructor(){
         this.colaboradores = new Colaboradores();
-    }
+    };
 
     // Renderiza uma lista dos colaboradores relacionados a empresa:
     renderTableColaboradores(req, res){
-        this.colaboradores.read(req.params.id, (error, result, fields) => {
+        this.colaboradores.read(req.params.id, (error, result) => {
+            console.log(result);
             // Confirmo se a requisição ao banco deu certo:(SE sim)
             if(!error){
                 res.render("pages_admin/table_colaboradores",{colaboradores:result, id_empresa: req.params.id});
@@ -15,9 +16,9 @@ class ControllersColaboradores{
             //(Se não)
             else{
                 console.log(error);
-            }
+            };
         });
-    }
+    };
 
     // Renderiza o formulario de cadastro de colaboradores:
     renderFormColaboradores(req, res){
@@ -26,8 +27,8 @@ class ControllersColaboradores{
         }
         catch (error) {
             console.log(error);
-        }
-    }
+        };
+    };
 
     //Cria um novo colaborador e renderiza a nova lista de colaboradores:
     createColaboradores(req, res){
@@ -48,15 +49,30 @@ class ControllersColaboradores{
             req.body.FK_turno
         );
         this.colaboradores.create((error, result) => {
-            // Confirmo se ouve problemas com a query:(Se nao)
+            // Comfirma se a query foi executada corretamente:(Se sim)
             if(!error){
                 res.redirect('/colaboradores/list/' + req.params.id);
             }
+            //(Se não)
             else{
                 console.log(error);
-            }
+            };
         });
-    }
-}
+    };
+
+    // Apaga um cadastro de colaborador:
+    deleteColaboradores(req, res){
+        this.colaboradores.delete(req.params.id, (error, result) => {
+            // Comfirma se a query foi executada corretamente:(Se sim)
+            if(!error){
+                res.redirect('/colaboradores/list/' + req.params.id_empresa);
+            }
+            //(Se não)
+            else{
+                console.log(error);
+            };
+        });
+    };
+};
 
 module.exports = new ControllersColaboradores();

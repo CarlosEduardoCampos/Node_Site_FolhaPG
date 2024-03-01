@@ -37,19 +37,19 @@ class Colaboradores extends Logins{
     // Raliza o cadastro de um novo colaborador:
     create(callback){
         this.conn.query("CALL create_colaborador(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-        [
-            this.nome,
-            this.telefone,
-            this.email,
-            this.senha,
-            this.cargo,
-            this.salario,
-            this.dt_admissao,
-            this.fk_empresa,
-            this.fk_periodo,
-            this.fk_turno
-        ],
-        callback
+            [
+                this.nome,
+                this.telefone,
+                this.email,
+                this.senha,
+                this.cargo,
+                this.salario,
+                this.dt_admissao,
+                this.fk_empresa,
+                this.fk_periodo,
+                this.fk_turno
+            ],
+            callback
         );
     };
 
@@ -58,7 +58,7 @@ class Colaboradores extends Logins{
         // Ferifica se a busca e por um colaborado especifico:(Se não)
         if(!id_login){
             this.conn.query(
-                "SELECT ID_login, ID_colaborador, nome, telefone, email, cargo FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.FK_empresa = ?;",
+                "SELECT ID_login, FK_empresa, ID_colaborador, nome, telefone, email, cargo FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.FK_empresa = ?;",
                 id_empresa,
                 callback
             );
@@ -82,8 +82,11 @@ class Colaboradores extends Logins{
     };
 
     // Apaga o cadastro de um colaborador:
-    delete(){
-
+    delete(id, callback){
+        this.conn.query("DELETE FROM fpg_logins WHERE ID_login = ?;",
+            id,
+            callback
+        );
     };
 };
 

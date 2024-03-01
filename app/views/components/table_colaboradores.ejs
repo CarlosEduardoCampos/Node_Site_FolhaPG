@@ -18,7 +18,7 @@
                 <td> <%= colaboradores[i].telefone %> </td>
                 <td> <%= colaboradores[i].cargo %> </td>
                 <td class="center">
-                    <a href="#" class="red">
+                    <a href="/colaboradores/delete/<%= colaboradores[i].ID_login %>/<%= colaboradores[i].FK_empresa %>" class="red">
                         <i class='bx bx-trash' ></i>
                     </a>
                 </td>
@@ -28,7 +28,7 @@
                     </a>
                 </td>
                 <td class="center">
-                    <a href="/colaboradores/list/<%= colaboradores[i].ID_empresa %>">
+                    <a href="#">
                         <i class='bx bx-group' ></i>
                     </a>
                 </td>

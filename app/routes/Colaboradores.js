@@ -12,4 +12,8 @@ module.exports = (app) => {
     app.post('/colaboradores/new/:id', (req,res) => {
         ControllersColaboradores.createColaboradores(req, res);
     });
+
+    app.get('/colaboradores/delete/:id/:id_empresa', (req, res) => {
+        ControllersColaboradores.deleteColaboradores(req, res);
+    });
 };

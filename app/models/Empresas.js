@@ -29,7 +29,7 @@ class Empresas extends Logins{
                 this.fk_tipo,
                 this.cnpj
             ],
-            callback()
+            callback
         );
     };
 
@@ -65,7 +65,7 @@ class Empresas extends Logins{
                 this.id_empresa,
                 this.cnpj
             ],
-            callback()
+            callback
         );
     };
 

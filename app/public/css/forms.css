@@ -29,6 +29,14 @@ form{
     gap: 5px;
 }
 
+.form-group2{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+    row-gap: 20px;
+    padding: 20px 0px;
+}
+
 .form-group > input, select{
     padding: 5px;
     font-size: 1em;
@@ -43,10 +51,14 @@ form{
     color: #fff;
     background-color: #399E5A;
     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.13);
+    margin-top: 20px;
 }
 .form-group > .btn:hover {
     background-color: #2c7945;
-} 
+}
+.col4{
+    grid-column: span 4;
+}
 .col3{
     grid-column: span 3;
 }

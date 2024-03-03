@@ -13,6 +13,14 @@ module.exports = (app) => {
         ControllersColaboradores.createColaboradores(req, res);
     });
 
+    app.get('/colaboradores/edit/:id', (req, res) =>{
+        ControllersColaboradores.renderFormEditColaboradores(req, res);
+    });
+
+    app.post('/colaboradores/edit/:id', (req, res) =>{
+        ControllersColaboradores.updateColaboradores(req, res);
+    });
+
     app.get('/colaboradores/delete/:id/:id_empresa', (req, res) => {
         ControllersColaboradores.deleteColaboradores(req, res);
     });

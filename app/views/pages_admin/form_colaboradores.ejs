@@ -17,51 +17,57 @@
         <hr>
     </header>
     <main>
-        <form action="/colaboradores/new/<%= id %>" method="post">
+        <form action="<%= action %>" method="post">
+            <div class="form-group col3">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" placeholder="Nome Completo" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].nome %> <% } %>" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="tel" name="telefone" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].telefone %> <% } %>" required>
+            </div>
             <div class="form-group col2">
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" placeholder="Nome Completo" required>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" placeholder="meuemail@gmail.com" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].email %> <% } %>">
             </div>
             <div class="form-group">
-                <label for="telefone">Telefone</label>
-                <input type="tel" name="telefone" required>
-            </div>
-            <div class="form-group col2">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" placeholder="meuemail@gmail.com">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].senha %> <% } %>">
             </div>
             <div class="form-group">
-                <label for="senha">Senha</label>
-                <input type="password" name="senha">
+                <label for="cargo">Cargo:</label>
+                <input type="text" name="cargo" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].cargo %> <% } %>">
             </div>
             <div class="form-group">
-                <label for="cargo"> Cargo </label>
-                <input type="text" name="cargo">
+                <label for="salario">Salario:</label>
+                <input type="number" name="salario" value= <% if(colaborador.length != 0){ %> <%= colaborador[0].salario %> <% } %>>
             </div>
             <div class="form-group">
-                <label for="salario">Salario</label>
-                <input type="number" name="salrio">
+                <label for="DT_admissao">Data da Admissão:</label>
+                <input type="date" name="DT_admissao" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].DT_admissao %> <% } %>" required>
             </div>
             <div class="form-group">
-                <label for="DT_admissao">Data da Admissão</label>
-                <input type="date" name="DT_admissao">
+                <label for="DT_demissao">Data da Demissão:</label>
+                <input type="date" name="DT_demissao" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].DT_demissao %> <% } %>">
             </div>
             <div class="form-group">
-                <label for="FK_periodo">Periodo de Pagamento</label>
+                <label for="FK_periodo">Periodo de Pagamento:</label>
                 <select name="FK_periodo">
-                    <option value="1">Mensal</option>
-                    <option value="2">Semanal</option>
-                    <option value="3">Quinzenal</option>
+                    <option <% if(colaborador && [0].FK_periodo === 1){ %> Selected <% } %> value="1">Mensal</option>
+                    <option <% if(colaborador && [0].FK_periodo === 2){ %> Selected <% } %> value="2">Semanal</option>
+                    <option <% if(colaborador && [0].FK_periodo === 3){ %> Selected <% } %> value="3">Quinzenal</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="FK_turno">Turno</label>
+                <label for="FK_turno">Turno:</label>
                 <select name="FK_turno">
-                    <option value="1">Manhã</option>
-                    <option value="2">Tarde</option>
-                    <option value="3">Noite</option>
+                    <option <% if(colaborador && [0].FK_turno === 1){ %> Selected <% } %> value="1">Manhã</option>
+                    <option <% if(colaborador && [0].FK_turno === 2){ %> Selected <% } %> value="2">Tarde</option>
+                    <option <% if(colaborador && [0].FK_turno === 3){ %> Selected <% } %> value="3">Noite</option>
                 </select>
             </div>
+            <input type="hidden" name="FK_empresa"  value= <% if(colaborador.length != 0){ %> <%= colaborador[0].FK_empresa %> <% } %>>
+            <input type="hidden" name="ID_login"  value= <% if(colaborador.length != 0){ %> <%= colaborador[0].ID_login %> <% } %>>
             <div class="form-group col3">
                 <input type="submit" value="Criar" class="btn">
             </div>

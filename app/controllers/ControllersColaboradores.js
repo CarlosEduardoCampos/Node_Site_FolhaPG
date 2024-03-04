@@ -50,28 +50,9 @@ class ControllersColaboradores{
     renderFormEditColaboradores(req, res){
         this.colaboradores.read(
             (error, result) => {
+                console.log(result);
                 // Confirma se a query foi executada corretamente:(Se sim)
                 if(!error){
-                    // Formata data de admição:
-                    if(result.DT_admissao){
-                        let data = new Date(result.DT_admissao); // Suponha que esta seja a data do servidor
-                        let dia = ("0" + data.getUTCDate()).slice(-2); // Obtém o dia e adiciona um zero à esquerda se necessário
-                        let mes = ("0" + (data.getUTCMonth() + 1)).slice(-2); // Obtém o mês (0-11, então adiciona 1) e adiciona um zero à esquerda se necessário
-                        let ano = data.getUTCFullYear();
-
-                        result.DT_admissao = ano + '-' + mes + '-' + dia;
-                    };
-
-                    if(result.DT_demissao) {
-                        let data = new Date(result.DT_demissao); // Suponha que esta seja a data do servidor
-                        let dia = ("0" + data.getUTCDate()).slice(-2); // Obtém o dia e adiciona um zero à esquerda se necessário
-                        let mes = ("0" + (data.getUTCMonth() + 1)).slice(-2); // Obtém o mês (0-11, então adiciona 1) e adiciona um zero à esquerda se necessário
-                        let ano = data.getUTCFullYear();
-
-                        result.DT_demissao = ano + '-' + mes + '-' + dia;
-                    };
-                    console.log(result);
-
                     res.render("pages_admin/form_colaboradores", {action:`/colaboradores/edit/${req.params.id}`, colaborador:result});
                 }
                 else{

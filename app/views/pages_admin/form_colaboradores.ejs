@@ -44,11 +44,11 @@
             </div>
             <div class="form-group">
                 <label for="DT_admissao">Data da Admissão:</label>
-                <input type="date" name="DT_admissao" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].DT_admissao %> <% } %>" required>
+                <input type="date" name="DT_admissao" value= <%if(colaborador.length != 0){%><%=colaborador[0].admissao%><%}%> required>
             </div>
             <div class="form-group">
                 <label for="DT_demissao">Data da Demissão:</label>
-                <input type="date" name="DT_demissao" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].DT_demissao %> <% } %>">
+                <input type="date" name="DT_demissao" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].demissao %> <% } %>">
             </div>
             <div class="form-group">
                 <label for="FK_periodo">Periodo de Pagamento:</label>

@@ -66,7 +66,7 @@ class Colaboradores extends Logins{
         //(Se sim)
         else{
             this.conn.query(
-                "SELECT * FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.ID_colaborador = ?;",
+                "SELECT *, DATE_FORMAT(DT_admissao, '%Y-%m-%d') AS admissao, DATE_FORMAT(DT_demissao, '%Y %m %e %d') as demissao FROM fpg_colaboradores INNER JOIN fpg_logins ON FK_login = ID_login JOIN fpg_tiposlogin ON fpg_logins.FK_tipo = fpg_tiposlogin.ID_tipo WHERE fpg_colaboradores.ID_colaborador = ?;",
                 [
                     id_colaborador
                 ],

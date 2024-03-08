@@ -84,8 +84,6 @@ CREATE TABLE IF NOT EXISTS fpg_beneficioscolaboradores(
 CREATE TABLE IF NOT EXISTS fpg_horasextra(
     horas INTEGER,
     minutos INTEGER,
-    mes INTEGER NOT NULL,
-    ano INTEGER NOT NULL,
     dia DATE NOT NULL,
     FK_colaborador INTEGER NOT NULL,
     FOREIGN KEY (FK_colaborador) REFERENCES fpg_colaboradores(ID_colaborador) ON DELETE CASCADE

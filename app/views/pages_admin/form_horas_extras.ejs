@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Horas Extras </title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../css/menu_admin.css">
+    <link rel="stylesheet" href="../../css/forms.css">
+    <link rel="stylesheet" href="../../css/cabecalho_tabela.css">
+    <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
+</head>
+<style>
+    body{
+        max-width: 100vw;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+</style>
+<body>
+    <%- include('../components/menu_admin.ejs') -%>
+    <header id="cabecalho_tabela">
+        <h1>Empresas > Colaboradores > Novo Colaborador</h1>
+        <hr>
+    </header>
+    <main>
+        <form action="#" method="post">
+            <div class="form-group col1">
+                <label for="horas">Horas:</label>
+                <input type="number" name="horas" value="0" required>
+            </div>
+            <div class="form-group col1">
+                <label for="minutos">Minutos:</label>
+                <input type="number" name="minutos" value="0" required>
+            </div>
+            <div class="form-group col1">
+                <label for="dia">Data:</label>
+                <input type="date" name="dia" value="0" required>
+            </div>
+            <div class="form-group col3">
+                <input type="submit" value="Criar" class="btn">
+            </div>
+        </form>
+        <table class="border">
+            <thead>
+                <tr>
+                    <th>Horas</th>
+                    <th>Minutos</th>
+                    <th>Data</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <% for( let i = 0; i < 10; i++) { %>
+                <tr>
+                    <td> 1 </td>
+                    <td> 2 </td>
+                    <td> 11/10/2021 </td>
+                    <td class="center">
+                        <a href="#" class="red">
+                            <i class='bx bx-trash' ></i>
+                        </a>
+                    </td>
+                </tr>
+            <% } %>
+            
+        </table>
+    </main>
+</body>
+</html>

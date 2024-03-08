@@ -6,6 +6,10 @@ class ControllersColaboradores{
         this.colaboradores = new Colaboradores();
         this.beneficios = new Beneficios();
     };
+    // Renderiza formulario e lista de horas extra por funcionario:
+    renderFormHoras(req, res){
+        res.render("pages_admin/form_horas_extras");
+    }
 
     // Renderiza uma lista dos colaboradores relacionados a empresa:
     renderTableColaboradores(req, res){

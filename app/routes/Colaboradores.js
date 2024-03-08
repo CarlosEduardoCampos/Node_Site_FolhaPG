@@ -24,4 +24,8 @@ module.exports = (app) => {
     app.get('/colaboradores/delete/:id/:id_empresa', (req, res) => {
         ControllersColaboradores.deleteColaboradores(req, res);
     });
+
+    app.get('/colaboradores/horas', (req, res) => {
+        ControllersColaboradores.renderFormHoras(req, res);
+    })
 };

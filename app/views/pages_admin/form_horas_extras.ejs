@@ -24,14 +24,14 @@
         <hr>
     </header>
     <main>
-        <form action="#" method="post">
+        <form action="/horasextra/new/<%= id %>" method="post">
             <div class="form-group col1">
                 <label for="horas">Horas:</label>
-                <input type="number" name="horas" value="0" required>
+                <input type="number" name="horas" value="0"  min=0 max=12 required>
             </div>
             <div class="form-group col1">
                 <label for="minutos">Minutos:</label>
-                <input type="number" name="minutos" value="0" required>
+                <input type="number" name="minutos" value="0"  min=0 max=60 required>
             </div>
             <div class="form-group col1">
                 <label for="dia">Data:</label>
@@ -51,11 +51,11 @@
                 </tr>
             </thead>
             
-            <% for( let i = 0; i < 10; i++) { %>
+            <% for( let i = 0; i < horas.length; i++) { %>
                 <tr>
-                    <td> 1 </td>
-                    <td> 2 </td>
-                    <td> 11/10/2021 </td>
+                    <td> <%= horas[i].horas %> </td>
+                    <td> <%= horas[i].minutos %> </td>
+                    <td> <%= horas[i].dia %> </td>
                     <td class="center">
                         <a href="#" class="red">
                             <i class='bx bx-trash' ></i>

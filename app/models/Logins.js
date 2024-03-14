@@ -1,4 +1,4 @@
-const connection = require("../../config/DataBaseMYSQL")
+const connection = require("../../config/DataBaseMYSQL");
 
 class Logins{
     constructor(id_login=0, nome='', telefone='', email='', senha='', fk_tipo=0){

@@ -60,7 +60,7 @@ class ControllersEmpresas{
         );
 
         // Chama função de cadastro:
-        this.empresa.create((error, result, fields) => {
+        this.empresa.create((error, result) => {
             // Confirma se a query foi executada corretamente:(Se sim)
             if(!error){
                 res.redirect('/Acess/System');

@@ -2,6 +2,7 @@ const Ocupacoes = require("../models/Ocupacoes");
 const Empresas = require("./Empresas");
 const Logins = require("./Logins");
 const Colaboradores = require("./Colaboradores");
+const HorasExtra = require("./HorasExtra");
 
 module.exports = (app) =>{
 
@@ -9,6 +10,7 @@ module.exports = (app) =>{
     Logins(app);
     Empresas(app);
     Colaboradores(app);
+    HorasExtra(app);
 
     // Rota principal(HOME):
     app.get('/', (req, res) => {

@@ -11,7 +11,6 @@ class ControllersHorasExtra{
         this.horasExtra.read((error, result) =>{
             // Verifica se a query executou corretamente:(SE sim)
             if(!error){
-                console.log(result);
                 res.render("pages_admin/form_horas_extras", {id: req.params.id, horas:result});
             }
             else{
@@ -24,6 +23,7 @@ class ControllersHorasExtra{
     createHoras(req, res){
         // Relaciona os dados da requisição ao objeto:
         this.horasExtra = new HorasExtras(
+            0,
             req.body.horas,
             req.body.minutos,
             req.body.dia,
@@ -41,6 +41,19 @@ class ControllersHorasExtra{
             }
         });
     };
-}
+
+    deleteHoras(req, res){
+        this.horasExtra.ID_horas = req.params.id_horas;
+        this.horasExtra.delete((error, result) => {
+            // Verifica se a query foi executada corretamente:(Se sim)
+            if(!error){
+                res.redirect('/horasextra/new/'+ req.params.id);
+            }
+            else{
+                console.log(error);
+            }
+        });
+    };
+};
 
 module.exports = new ControllersHorasExtra();

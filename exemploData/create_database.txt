@@ -82,6 +82,7 @@ CREATE TABLE IF NOT EXISTS fpg_beneficioscolaboradores(
 );
 
 CREATE TABLE IF NOT EXISTS fpg_horasextra(
+    ID_Horas INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     horas INTEGER,
     minutos INTEGER,
     dia DATE NOT NULL,

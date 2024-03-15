@@ -1,8 +1,9 @@
 const connection = require("../../config/DataBaseMYSQL");
 
 class HorasExtras{
-    constructor(horas=0, minutos=0, dia='', fk_colaborador){
-        this.conn = connection
+    constructor(id=0, horas=0, minutos=0, dia='', fk_colaborador=0){
+        this.conn = connection;
+        this.ID_horas = id;
         this.horas = horas;
         this.minutos = minutos;
         this.dia = dia;
@@ -24,16 +25,17 @@ class HorasExtras{
     };
     read(callback){
         this.conn.query(
-            "SELECT horas, minutos, DATE_FORMAT(dia, '%d/%m/%Y') AS dia FROM  fpg_horasextra WHERE FK_colaborador = ?;",
+            "SELECT ID_horas AS id, horas, minutos, DATE_FORMAT(dia, '%d/%m/%Y') AS dia FROM  fpg_horasextra WHERE FK_colaborador = ?;",
             [this.fk_colaborador],
             callback
         );
     };
-    update(){
-
-    };
-    delete(){
-
+    delete(callback){
+        this.conn.query(
+            'DELETE FROM fpg_horasextra WHERE ID_horas = ?;',
+            [this.ID_horas],
+            callback
+        )
     };
 };
 

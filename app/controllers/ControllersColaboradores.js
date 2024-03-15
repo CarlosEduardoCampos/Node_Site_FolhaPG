@@ -50,7 +50,6 @@ class ControllersColaboradores{
     renderFormEditColaboradores(req, res){
         this.colaboradores.read(
             (error, result) => {
-                console.log(result);
                 // Confirma se a query foi executada corretamente:(Se sim)
                 if(!error){
                     res.render("pages_admin/form_colaboradores", {action:`/colaboradores/edit/${req.params.id}`, colaborador:result});

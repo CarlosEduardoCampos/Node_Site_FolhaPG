@@ -70,7 +70,8 @@ CREATE TABLE IF NOT EXISTS fpg_descontoscolaboradores(
 CREATE TABLE IF NOT EXISTS fpg_beneficios(
 	ID_beneficio INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(50) NOT NULL,
-    descricao VARCHAR(200)
+    descricao VARCHAR(200),
+    valor DECIMAL(10, 2)
 );
 
 # Unindo a tabela de beneficios e colaborador:
@@ -153,6 +154,32 @@ BEGIN
     
     INSERT INTO fpg_colaboradores(cargo, salario, DT_admissao, FK_empresa, FK_periodo, FK_turno, FK_login)
     VALUES (pc_cargo, pc_salario, pc_dt_admissao, pc_fk_empresa, pc_fk_periodo, pc_fk_turno, LAST_INSERT_ID());
+END $$
+
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS update_colaboradores;
+
+DELIMITER $$
+
+CREATE PROCEDURE IF NOT EXISTS update_colaboradores(
+    pc_id_login INTEGER,
+    pc_id_colaborador INTEGER,
+    pc_nome VARCHAR(50),
+    pc_telefone VARCHAR(18),
+    pc_email VARCHAR(200),
+    pc_senha VARCHAR(200),
+    pc_cargo varchar(15),
+    pc_salario DECIMAL(10, 2),
+    pc_dt_admissao DATE,
+    pc_dt_demissao DATE,
+    pc_fk_periodo INTEGER,
+    pc_fk_turno INTEGER
+)
+BEGIN
+    UPDATE fpg_logins SET nome = pc_nome, telefone = pc_telefone, email = pc_email WHERE ID_login = pc_id_login;
+    
+    UPDATE fpg_colaboradores SET cargo = pc_cargo, salario = pc_salario, DT_admissao = pc_dt_admissao, DT_demissao = pc_dt_demissao, FK_periodo = pc_fk_periodo, FK_turno = pc_fk_turno WHERE ID_colaborador = pc_id_colaborador; 
 END $$
 
 DELIMITER ;

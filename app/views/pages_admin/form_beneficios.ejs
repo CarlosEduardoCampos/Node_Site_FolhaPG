@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Horas Extras </title>
+    <title> Beneficios </title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../../css/menu_admin.css">
     <link rel="stylesheet" href="../../css/forms.css">
@@ -24,14 +24,14 @@
         <hr>
     </header>
     <main>
-        <form action="/horasextra/new/<%= id %>" method="post">
+        <form action="/beneficios/new" method="post">
             <div class="form-group">
                 <label for="titulo">Titulo:</label>
-                <input type="text" placeholder="Vale Alimentação" required>
+                <input type="text" name="titulo" placeholder="Vale Alimentação" required>
             </div>
             <div class="form-group col2">
                 <label for="descricao">Descrição:</label>
-                <input type="text" placeholder="Cartão prepago para gastos alimenticios">
+                <input type="text" name="descricao" placeholder="Cartão prepago para gastos alimenticios">
             </div>
             <div class="form-group">
                 <label for="valor">Valor:</label>
@@ -55,7 +55,7 @@
                     <td> <%= beneficios[i].titulo %> </td>
                     <td> <%= beneficios[i].descricao %> </td>
                     <td class="center">
-                        <a href="/horasextra/delete/<%= id %>/<%= beneficios[i].ID_beneficio %>" class="red">
+                        <a href="/horasextra/delete/<%= beneficios[i].ID_beneficio %>" class="red">
                             <i class='bx bx-trash' ></i>
                         </a>
                     </td>

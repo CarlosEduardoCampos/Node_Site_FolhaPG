@@ -9,10 +9,26 @@ class ControllersBeneficios{
         this.beneficios.read((error, result) => {
             // Verifica se a query foi executada com sucesso:
             if(!error){
-                res.render('pages_admin/form_beneficios',{beneficios: result, id: req.params.id});
+                res.render('pages_admin/form_beneficios',{beneficios: result});
             }
             else{
                 console.log(error);
+            }
+        });
+    };
+
+    createBeneficios(req, res){
+        this.beneficios = new Beneficios(
+            0,
+            req.body.titulo,
+            req.body.descricao ? req.body.descricao : '',
+            req.body.valor ? req.body.valor : 0
+        );
+        
+        this.beneficios.create((error, result) => {
+            // Verifica se a query executou corretamente:
+            if(!error){
+                res.redirect('/beneficios/new');
             }
         });
     }

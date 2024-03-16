@@ -20,44 +20,42 @@
 <body>
     <%- include('../components/menu_admin.ejs') -%>
     <header id="cabecalho_tabela">
-        <h1>Empresas > Colaboradores > Novo Colaborador</h1>
+        <h1>Empresas > Colaboradores > Beneficios</h1>
         <hr>
     </header>
     <main>
         <form action="/horasextra/new/<%= id %>" method="post">
-            <div class="form-group col1">
-                <label for="horas">Horas:</label>
-                <input type="number" name="horas" value="0"  min=0 max=12 required>
+            <div class="form-group">
+                <label for="titulo">Titulo:</label>
+                <input type="text" placeholder="Vale Alimentação" required>
             </div>
-            <div class="form-group col1">
-                <label for="minutos">Minutos:</label>
-                <input type="number" name="minutos" value="0"  min=0 max=60 required>
+            <div class="form-group col2">
+                <label for="descricao">Descrição:</label>
+                <input type="text" placeholder="Cartão prepago para gastos alimenticios">
             </div>
-            <div class="form-group col1">
-                <label for="dia">Data:</label>
-                <input type="date" name="dia" value="0" required>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="number" name="valor" min="0" placeholder="400,00">
             </div>
-            <div class="form-group col1">
+            <div class="form-group">
                 <input type="submit" value="Criar" class="btn">
             </div>
         </form>
         <table class="border">
             <thead>
                 <tr>
-                    <th>Horas</th>
-                    <th>Minutos</th>
-                    <th>Data</th>
+                    <th>Titulo</th>
+                    <th>Descrição</th>
                     <th></th>
                 </tr>
             </thead>
             
-            <% for( let i = 0; i < horas.length; i++) { %>
+            <% for( let i = 0; i < beneficios.length; i++) { %>
                 <tr>
-                    <td> <%= horas[i].horas %> </td>
-                    <td> <%= horas[i].minutos %> </td>
-                    <td> <%= horas[i].dia %> </td>
+                    <td> <%= beneficios[i].titulo %> </td>
+                    <td> <%= beneficios[i].descricao %> </td>
                     <td class="center">
-                        <a href="/horasextra/delete/<%= id %>/<%= horas[i].id %>" class="red">
+                        <a href="/horasextra/delete/<%= id %>/<%= beneficios[i].ID_beneficio %>" class="red">
                             <i class='bx bx-trash' ></i>
                         </a>
                     </td>

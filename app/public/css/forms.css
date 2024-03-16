@@ -16,16 +16,14 @@ main{
     display: flex;
     flex-direction: row;
     justify-content:space-around;
-    
+    gap: 20px;
 }
 
 form{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
-    row-gap: 20px;
     padding: 20px 0px;
-    height: 300px;
 }
 
 .form-group{
@@ -38,7 +36,6 @@ form{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
-    row-gap: 20px;
     padding: 20px 0px;
 }
 

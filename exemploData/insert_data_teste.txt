@@ -1,45 +1,45 @@
-USE folha_pg;
-
 -- Inserindo dados na tabela fpg_tiposlogin
-INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Administrador', 'Acesso total ao sistema');
-INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Gerente', 'Acesso limitado ao sistema');
-INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Funcionário', 'Acesso restrito ao sistema');
-INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES ('Visitante', 'Acesso mínimo ao sistema');
+INSERT INTO fpg_tiposlogin(tipo, descricao) VALUES 
+('Administrador', 'Acesso total ao sistema'),
+('Gerente', 'Acesso limitado ao sistema'),
+('Funcionário', 'Acesso restrito ao sistema'),
+('Visitante', 'Acesso mínimo ao sistema');
 
 -- Inserindo dados na tabela fpg_periodosdepagamento
-INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Mensal', 30);
-INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Semanal', 7);
-INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES ('Quinzenal', 15);
+INSERT INTO fpg_periodosdepagamento(titulo, numero_de_dias) VALUES 
+('Mensal', 30),
+('Semanal', 7),
+('Quinzenal', 15);
 
 -- Inserindo dados na tabela fpg_turnos
-INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Manhã', 'Das 8h às 12h');
-INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Tarde', 'Das 13h às 17h');
-INSERT INTO fpg_turnos(titulo, descricao) VALUES ('Noite', 'Das 18h às 22h');
+INSERT INTO fpg_turnos(titulo, descricao) VALUES 
+('Manhã', 'Das 8h às 12h'),
+('Tarde', 'Das 13h às 17h'),
+('Noite', 'Das 18h às 22h');
 
 -- Inserindo dados Login Administrador
-INSERT INTO fpg_logins(nome, telefone, email, senha, fk_tipo) VALUES ('adimin', '(37) 98765-4321' , 'adimin@folhapg.com', 'admin', 1);
+INSERT INTO fpg_logins(nome, telefone, email, senha, FK_tipo) VALUES 
+('adimin', '(37) 98765-4321', 'adimin@folhapg.com', 'admin', 1);
 
 -- Chamando a procedure create_empresa para criar empresas
-CALL create_empresa('Supermercado Real', '(31) 98765-4321', 'contato@supermercadoreal.com.br', 'senhaSuperSegura123', 2, '58.267.455/0001-15');
-CALL create_empresa('Restaurante Saboroso', '(31) 98765-4322', 'contato@restaurantesaboroso.com.br', 'senhaSuperSegura123', 2, '58.267.455/0001-16');
-CALL create_empresa('Loja de Roupas Elegante', '(31) 98765-4323', 'contato@lojaderoupaselegante.com.br', 'senhaSuperSegura123', 2, '58.267.455/0001-17');
+CALL create_empresa('Supermercado Real', '(31) 98765-4321', 'contato@supermercadoreal.com.br', 'senhaSuperSegura123', '58.267.455/0001-15');
+CALL create_empresa('Restaurante Saboroso', '(31) 98765-4322', 'contato@restaurantesaboroso.com.br', 'senhaSuperSegura123', '58.267.455/0001-16');
+CALL create_empresa('Loja de Roupas Elegante', '(31) 98765-4323', 'contato@lojaderoupaselegante.com.br', 'senhaSuperSegura123', '58.267.455/0001-17');
 
 -- Chamando a procedure create_colaborador para criar colaboradores
-CALL create_colaborador('João Silva', '(31) 98765-4321', 'joao.silva@empresa.com.br', 'senhaSuperSegura123', 3, 'Gerente', 4500.00, '2024-02-23', 1, 1, 1);
-CALL create_colaborador('Maria Santos', '(31) 98765-4322', 'maria.santos@empresa.com.br', 'senhaSuperSegura123', 3, 'Caixa', 3000.00, '2024-02-24', 2, 2, 2);
-CALL create_colaborador('Carlos Pereira', '(31) 98765-4323', 'carlos.pereira@empresa.com.br', 'senhaSuperSegura123', 3, 'Vendedor', 3500.00, '2024-02-25', 3, 3, 3);
+CALL create_colaborador('João Silva', '(31) 98765-4321', 'joao.silva@empresa.com.br', 'senhaSuperSegura123', 'Gerente', 4500.00, '2024-02-23', 1, 1, 1);
+CALL create_colaborador('Maria Santos', '(31) 98765-4322', 'maria.santos@empresa.com.br', 'senhaSuperSegura123', 'Caixa', 3000.00, '2024-02-24', 2, 1, 2);
+CALL create_colaborador('Carlos Pereira', '(31) 98765-4323', 'carlos.pereira@empresa.com.br', 'senhaSuperSegura123', 'Vendedor', 3500.00, '2024-02-25', 3, 1, 3);
 
 -- Inserindo dados na tabela fpg_descontos
-INSERT INTO fpg_descontos(titulo, descricao) VALUES ('INSS', 'Desconto do INSS');
-INSERT INTO fpg_descontos(titulo, descricao) VALUES ('IRPF', 'Desconto do Imposto de Renda');
-INSERT INTO fpg_descontos(titulo, descricao) VALUES ('Vale Transporte', 'Desconto do Vale Transporte');
+INSERT INTO fpg_descontos(titulo, descricao) VALUES 
+('INSS', 'Desconto do INSS'),
+('IRPF', 'Desconto do Imposto de Renda'),
+('Vale Transporte', 'Desconto do Vale Transporte');
 
 -- Inserindo dados na tabela fpg_beneficios
-INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Vale Alimentação', 'Benefício de Vale Alimentação');
-INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Vale Transporte', 'Benefício de Vale Transporte');
-INSERT INTO fpg_beneficios(titulo, descricao) VALUES ('Plano de Saúde', 'Benefício de Plano de Saúde');
+INSERT INTO fpg_beneficios(titulo, descricao) VALUES 
+('Vale Alimentação', 'Benefício de Vale Alimentação'),
+('Vale Transporte', 'Benefício de Vale Transporte'),
+('Plano de Saúde', 'Benefício de Plano de Saúde');
 
--- Inserindo dados na tabela fpg_horasextra
-INSERT INTO fpg_horasextra(horas, minutos, mes, ano, dia, FK_colaborador) VALUES (2, 30, 2, 2024, '2024-02-26', 1);
-INSERT INTO fpg_horasextra(horas, minutos, mes, ano, dia, FK_colaborador) VALUES (1, 45, 2, 2024, '2024-02-27', 2);
-INSERT INTO fpg_horasextra(horas, minutos, mes, ano, dia, FK_colaborador) VALUES (3, 15, 2, 2024, '2024-02-28', 3);

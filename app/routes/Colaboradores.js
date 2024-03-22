@@ -28,4 +28,7 @@ module.exports = (app) => {
     app.get('/colaboradores/horas', (req, res) => {
         ControllersColaboradores.renderFormHoras(req, res);
     })
+    app.get('/colaboradores/print', (req, res) => {
+        ControllersColaboradores.printColaboradores(req, res);
+    })
 };

@@ -17,7 +17,7 @@
         <hr>
     </header>
     <main>
-        <form action="<%= action %>" method="post">
+        <form action="<%= action %>" method="post" class="col4">
             <div class="form-group col3">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" placeholder="Nome Completo" value="<% if(colaborador.length != 0){ %> <%= colaborador[0].nome %> <% } %>" required>

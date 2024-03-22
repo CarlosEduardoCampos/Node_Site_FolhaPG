@@ -20,7 +20,11 @@ $~ npm install ejs
     Instala biblioteca que permite inserir js no html.
 
 $~ npm install mysql --save
-    Instala pacode de depedencia do banco de dados MySQL
+    Instala pacode de depedencia do banco de dados MySQL.
+
+$~ npm i puppeteer
+$~ npm i pdfmake
+    Intala biblioteca de criação de pdf.
 
 ### COMANDOS UTEIS:
 

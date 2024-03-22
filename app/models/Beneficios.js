@@ -31,7 +31,11 @@ class Beneficios{
     };
 
     delete(calback){
-
+        this.conn.query(
+            "DELETE FROM fpg_beneficios WHERE ID_beneficio = ?;",
+            [this.id_beneficio],
+            calback
+        );
     };
 }
 

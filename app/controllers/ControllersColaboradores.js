@@ -1,5 +1,6 @@
 const Colaboradores = require("../models/Colaboradores");
 const Beneficios = require("../models/Beneficios");
+const fs = require('fs');
 
 class ControllersColaboradores{
     constructor(){
@@ -136,6 +137,84 @@ class ControllersColaboradores{
             };
         });
     };
+
+    printColaboradores(req, res){
+        /*
+        const pdfmake = require('pdfmake');
+        const printer = new pdfmake({
+        Roboto: {
+            normal: './app/public/fonts/Roboto_Slab/static/RobotoSlab-Regular.ttf',
+            bold: './app/public/fonts/Roboto_Slab/static/RobotoSlab-Medium.ttf',
+            italics: './app/public/fonts/Roboto_Slab/static/RobotoSlab-Italic.ttf',
+            bolditalics: './app/public/fonts/Roboto_Slab/static/RobotoSlab-MediumItalic.ttf'
+        }
+        });
+
+        let funcionarios = [
+        { nome: 'Funcionario 1', cargo: 'Cargo 1' },
+        { nome: 'Funcionario 2', cargo: 'Cargo 2' },
+        // adicione mais funcionários conforme necessário
+        ];
+
+        let corpo = funcionarios.map(f => [f.nome, f.cargo]);
+
+        let docDefinition = {
+        content: [
+            { text: 'Lista de Funcionários', style: 'header' },
+            {
+            table: {
+                body: [['Nome', 'Cargo'], ...corpo]
+            }
+            }
+        ],
+        styles: {
+            header: {
+            fontSize: 18,
+            bold: true,
+            margin: [0, 0, 0, 10]
+            }
+        }
+        };
+
+        let pdfDoc = printer.createPdfKitDocument(docDefinition);
+        pdfDoc.pipe(fs.createWriteStream('Lista_de_Funcionarios.pdf'));
+        res.redirect('Lista_de_Funcionarios.pdf');
+        pdfDoc.end();
+        */
+
+        (async () => {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+        
+            // Defina seu HTML aqui. Eu estou usando uma tabela simples para este exemplo.
+            const content = `
+                <html>
+                <body>
+                    <table>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cargo</th>
+                    </tr>
+                    <tr>
+                        <td>João Silva</td>
+                        <td>joao.silva@empresa.com.br</td>
+                        <td>(31) 98765-4321</td>
+                        <td>Gerente</td>
+                    </tr>
+                    <!-- Adicione mais colaboradores conforme necessário -->
+                    </table>
+                </body>
+                </html>
+            `;
+        
+            await page.setContent(content);
+            await page.pdf({ path: 'lista_de_colaboradores.pdf', format: 'A4' });
+        
+            //await browser.close();
+        })();
+    }
 };
 
 module.exports = new ControllersColaboradores();

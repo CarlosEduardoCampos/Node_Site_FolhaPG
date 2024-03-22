@@ -8,4 +8,8 @@ module.exports = (app) =>{
     app.post('/beneficios/new', (req, res) => {
         ControllersBeneficios.createBeneficios(req, res);
     });
+
+    app.get('/beneficios/delete/:id', (req, res) => {
+        ControllersBeneficios.deleteBeneficios(req, res);
+    });
 }

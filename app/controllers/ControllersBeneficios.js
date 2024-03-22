@@ -32,6 +32,17 @@ class ControllersBeneficios{
             }
         });
     }
+
+    deleteBeneficios(req, res){
+        this.beneficios.id_beneficio = req.params.id;
+
+        this.beneficios.delete((error, result) =>{
+            // Verifica se a query executou corretamente:
+            if(!error){
+                res.redirect('/beneficios/new');
+            }
+        });
+    }
 }
 
 module.exports = new ControllersBeneficios();

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        table{
+            width: 95%;
+            background-color: black;
+            margin: auto;
+        }
+        th{
+            text-align: center;
+        }
+        th, td{
+            background-color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let i = 0; i < colaboradores.length; i++) { %>
+                <tr>
+                    <td> <%= colaboradores[i].nome %></td>
+                    <td> <%= colaboradores[i].email %> </td>
+                    <td> <%= colaboradores[i].telefone %> </td>
+                    <td> <%= colaboradores[i].cargo %> </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

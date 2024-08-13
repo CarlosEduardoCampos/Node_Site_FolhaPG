@@ -66,6 +66,9 @@
                     <option <% if(colaborador && [0].FK_turno === 3){ %> Selected <% } %> value="3">Noite</option>
                 </select>
             </div>
+            <div class="form-group col4">
+                
+            </div>
             <input type="hidden" name="FK_empresa"  value= <% if(colaborador.length != 0){ %> <%= colaborador[0].FK_empresa %> <% } %>>
             <input type="hidden" name="ID_login"  value= <% if(colaborador.length != 0){ %> <%= colaborador[0].ID_login %> <% } %>>
             <div class="form-group col4">

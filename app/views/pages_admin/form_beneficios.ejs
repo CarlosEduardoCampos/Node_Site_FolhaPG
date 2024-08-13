@@ -25,12 +25,12 @@
         <hr>
     </header>
     <main>
-        <form action="/beneficios/new" method="post" class="limite col2">
+        <form action="/beneficios/new" method="post" class="col4">
             <div class="form-group">
                 <label for="titulo">Titulo:</label>
                 <input type="text" name="titulo" placeholder="Vale Alimentação" required>
             </div>
-            <div class="form-group col3">
+            <div class="form-group col2">
                 <label for="descricao">Descrição:</label>
                 <input type="text" name="descricao" placeholder="Cartão prepago para gastos alimenticios">
             </div>
@@ -38,15 +38,16 @@
                 <label for="valor">Valor:</label>
                 <input type="number" name="valor" min="0" placeholder="400,00">
             </div>
-            <div class="form-group col4">
+            <div class="form-group col1">
                 <input type="submit" value="Salvar" class="btn">
             </div>
         </form>
-        <table class="col2">
+        <table class="col4">
             <thead>
                 <tr>
                     <th>Titulo</th>
                     <th>Descrição</th>
+                    <th>Valor</th>
                     <th></th>
                 </tr>
             </thead>
@@ -55,6 +56,7 @@
                 <tr>
                     <td> <%= beneficios[i].titulo %> </td>
                     <td> <%= beneficios[i].descricao %> </td>
+                    <td> <%= beneficios[i].valor %></td>
                     <td class="center red">
                         <a href="/beneficios/delete/<%= beneficios[i].ID_beneficio %>" class="red">
                             <i class='bx bx-trash' ></i>
@@ -62,14 +64,6 @@
                     </td>
                 </tr>
             <% } %>
-
-            <%if(beneficios.length < 5) { for( let i = 0; i < 6; i++) { %>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            <% }} %>
         </table>
     </main>
 </body>
